@@ -2,8 +2,12 @@ import "Sensor.thingml"
 import "Pump.thingml"
 import "_Datatypes.thingml"
 
+/* AVISO:
+* ESSE ARQUIVO É UM ESBOÇO, ELE NÃO É FUNCIONAL NO MOMENTO E NÃO DEVE SER UTILIZADO.
+* THIS FILE IS A DRAFT, IT IS NOT CURRENTLY FUNCTIONAL AND SHOULD NOT BE USED.
+*/
+
 thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs { 
-	
 	// Sensor ports
 	required port sbcb {
 		receives sensor_ON, sensor_OFF
@@ -21,7 +25,7 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 		receives sensor_ON, sensor_OFF
 	}
 	
-	// Pump ports
+	// Pump port
 	required port pump {
 		sends pump_ON, pump_OFF 
 	}
@@ -32,14 +36,13 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 				pump!pump_OFF()
 			end
 			transition -> ON event e : sbcb?sensor_ON
-			guard sbcb!enoughWater()
-			action ctrl!sensor_ON()
 		}
 		
 		state ON {
 			on entry do
 				pump!pump_ON()
 			end
+			transition -> OFF event e : sbcb?sensor_ON
 		}
 	}
 }
@@ -47,6 +50,9 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 protocol Timer;
 
 configuration PumpSystem {
+	
+	instance pumpSystem : PumpSystem
+	instance pump : Pump
 	instance sbcb : Sensor
 		set sbcb.PIN = 7
 	instance sbca : Sensor 
@@ -55,9 +61,12 @@ configuration PumpSystem {
 		set sbca.PIN = 9
 	instance saca : Sensor 
 		set saca.PIN = 10
-	instance pump : Pump
-		set pump.PIN = 11
 	
+	connector pumpSystem.sbcb => sbcb.ctrl
+	connector pumpSystem.sacb => sacb.ctrl
+	connector pumpSystem.sbca => sbca.ctrl
+	connector pumpSystem.saca => saca.ctrl
+	connector pumpSystem.pump => pump.notify
 	connector sbcb.clock over Timer
 	connector sacb.clock over Timer
 	connector sbca.clock over Timer
