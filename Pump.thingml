@@ -1,0 +1,30 @@
+import "_Datatypes.thingml"
+
+thing fragment PumpMsgs {
+	message pump_ON();
+	message pump_OFF();
+}
+
+thing Pump includes PumpMsgs {		
+	property PIN: UInt8 = 7
+	
+	provided port notify {
+		receives pump_ON, pump_OFF
+	}
+	
+	function switch(value : DigitalState) do
+		`digitalWrite(`&PIN&`, `&value&`)`
+	end
+	
+	statechart Pump init OFF {
+		state OFF {
+			on entry switch(DigitalState:LOW)
+			transition -> ON event notify?pump_ON
+		}
+		
+		state ON {
+			on entry switch(DigitalState:HIGH)
+			transition -> OFF event notify?pump_OFF
+		}
+	}
+}
