@@ -9,7 +9,7 @@ thing Sensor includes SensorMsgs, TimerMsgs {
 	property PIN: UInt8 = 10
 	
 	required port clock {
-		receives ms1000_tic
+		receives ms25_tic
 	}
 
 	provided port ctrl {
@@ -26,15 +26,14 @@ thing Sensor includes SensorMsgs, TimerMsgs {
 	
 	statechart Sensor init OFF {
 		on entry setDigitalInput(PIN)
-				
 		state OFF {
-			transition -> ON event clock?ms1000_tic
+			transition -> ON event clock?ms25_tic
 			guard enoughWater()
 			action ctrl!sensor_ON()
 		}
 		
 		state ON {
-			transition -> OFF event clock?ms1000_tic
+			transition -> OFF event clock?ms25_tic
 			guard not enoughWater()
 			action ctrl!sensor_OFF()
 		}
