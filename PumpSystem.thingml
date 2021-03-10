@@ -55,7 +55,7 @@ configuration PumpSystem {
 	instance pump : Pump
 	instance sbcb : Sensor
 		set sbcb.PIN = 7
-	instance sbca : Sensor 
+	instance sacb : Sensor 
 		set sacb.PIN = 8
 	instance sbca : Sensor 
 		set sbca.PIN = 9
