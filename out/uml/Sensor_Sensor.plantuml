@@ -1,0 +1,17 @@
+@startuml
+skinparam defaultTextAlignment left
+caption Behavior of thing Sensor
+[*] --> Sensor
+state Sensor{
+state OFF_1{
+
+OFF_1 --> ON_1 : clock?ms25_tic[enoughWater()]\naction ...\n
+}
+state ON_1{
+
+ON_1 --> OFF_1 : clock?ms25_tic[not enoughWater()]\naction ...\n
+}
+[*] --> OFF_1
+	Sensor : entry / ...\n
+}
+@enduml

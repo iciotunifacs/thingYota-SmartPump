@@ -1,0 +1,57 @@
+@startuml
+caption Things used in configuration PumpSystem
+class PumpSystem <<(T,#5BBF09)PIM>> {
+..▼ Port sbcb ▼..
+▶ sensor_ON
+▶ sensor_OFF
+..▼ Port sbca ▼..
+▶ sensor_ON
+▶ sensor_OFF
+..▼ Port sacb ▼..
+▶ sensor_ON
+▶ sensor_OFF
+..▼ Port saca ▼..
+▶ sensor_ON
+▶ sensor_OFF
+..▼ Port pump ▼..
+◀ pump_ON
+◀ pump_OFF
+}
+class TimerMsgs <<(F,#BC74ED)Fragment>> {
+..Messages..
+-timer_start(...)
+-timer_cancel(...)
+-timer_timeout(...)
+-ms25_tic()
+-ms500_tic()
+-ms1000_tic()
+}
+class SensorMsgs <<(F,#BC74ED)Fragment>> {
+..Messages..
+-sensor_ON()
+-sensor_OFF()
+}
+class PumpMsgs <<(F,#BC74ED)Fragment>> {
+..Messages..
+-pump_ON()
+-pump_OFF()
+}
+class Sensor <<(T,#F94918)PSM>> {
+..▼ Port clock ▼..
+▶ ms25_tic
+..▲ Port ctrl ▲..
+◀ sensor_ON
+◀ sensor_OFF
+}
+class Pump <<(T,#F94918)PSM>> {
+..▲ Port notify ▲..
+▶ pump_ON
+▶ pump_OFF
+}
+TimerMsgs <|-- PumpSystem
+SensorMsgs <|-- PumpSystem
+PumpMsgs <|-- PumpSystem
+SensorMsgs <|-- Sensor
+TimerMsgs <|-- Sensor
+PumpMsgs <|-- Pump
+@enduml

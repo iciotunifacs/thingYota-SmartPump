@@ -1,0 +1,18 @@
+@startuml
+skinparam defaultTextAlignment left
+caption Behavior of thing PumpSystem
+[*] --> PumpSystem
+state PumpSystem{
+state OFF{
+	OFF : entry / do\n	pump!pump_OFF()\nend\n
+
+OFF --> ON : e:sbcb?sensor_ON
+}
+state ON{
+	ON : entry / do\n	pump!pump_ON()\nend\n
+
+ON --> OFF : e:sbcb?sensor_ON
+}
+[*] --> OFF
+}
+@enduml

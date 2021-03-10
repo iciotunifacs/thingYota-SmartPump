@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="384px" preserveAspectRatio="none" style="width:352px;height:384px;" version="1.1" viewBox="0 0 352 384" width="352px" zoomAndPan="magnify"><defs><filter height="300%" id="f8yz17slddbva" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="173.5" cy="16" fill="#000000" filter="url(#f8yz17slddbva)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#FEFECE" filter="url(#f8yz17slddbva)" height="265.5625" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="333" x="7" y="86"/><rect fill="#FFFFFF" height="233.2656" rx="12.5" ry="12.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="327" x="10" y="115.2969"/><line style="stroke:#A80036;stroke-width:1.5;" x1="7" x2="340" y1="112.2969" y2="112.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="128" y="103.9951">PumpSystem</text><ellipse cx="158" cy="133.2969" fill="#000000" filter="url(#f8yz17slddbva)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><g id="PumpSystem.OFF"><rect fill="#FEFECE" filter="url(#f8yz17slddbva)" height="50.2656" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="278" x="19" y="180.2969"/><line style="stroke:#A80036;stroke-width:1.5;" x1="19" x2="297" y1="206.5938" y2="206.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="27" x="144.5" y="198.292">OFF</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="72" x="24" y="222.7324">entry / do\n</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="162" x="120" y="222.7324">pump!pump_OFF()\nend\n</text></g><g id="PumpSystem.OFF.ON"><rect fill="#FEFECE" filter="url(#f8yz17slddbva)" height="50.2656" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="273" x="21.5" y="283.2969"/><line style="stroke:#A80036;stroke-width:1.5;" x1="21.5" x2="294.5" y1="309.5938" y2="309.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="21" x="147.5" y="301.292">ON</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="72" x="26.5" y="325.7324">entry / do\n</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="157" x="122.5" y="325.7324">pump!pump_ON()\nend\n</text></g><!--MD5=[d2d441d32c69e74af1ceddc6068f81df]
+link OFF to ON--><path d="M102.98,230.3869 C96.61,235.3969 90.97,241.3269 87,248.2969 C80.07,260.4469 86.12,271.1669 97.1,280.0269 " fill="none" id="OFF-to-ON" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="101.36,283.2069,96.56,274.6069,97.36,280.2069,91.76,281.0069,101.36,283.2069" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119" x="88" y="261.3638">e:sbcb?sensor_ON</text><!--MD5=[f42c3279df6b631060a080b66912768d]
+link ON to OFF--><path d="M195.88,283.2669 C206.61,273.2969 213.95,261.0769 208,248.2969 C205.65,243.2569 202.37,238.6169 198.6,234.3969 " fill="none" id="ON-to-OFF" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="195.02,230.6369,198.3313,239.9124,198.4686,234.2572,204.1238,234.3946,195.02,230.6369" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119" x="211" y="261.3638">e:sbcb?sensor_ON</text><!--MD5=[5962f109e0c7cf49550d9694fa03813e]
+link *start*PumpSystem to OFF--><path d="M158,143.4469 C158,151.4869 158,163.6269 158,174.9469 " fill="none" id="*start*PumpSystem-to-OFF" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="158,180.0769,162,171.0769,158,175.0769,154,171.0769,158,180.0769" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b98da2ff0b273850b912d6e87e095986]
+link *start to PumpSystem--><path d="M173.5,26.16 C173.5,37.23 173.5,57.26 173.5,80.34 " fill="none" id="*start-to-PumpSystem" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="173.5,85.62,177.5,76.62,173.5,80.62,169.5,76.62,173.5,85.62" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="64" y="375.5576">Behavior of thing PumpSystem</text><!--MD5=[a395c093ba89fe4fe8a8e09a9a2e045b]
+@startuml
+skinparam defaultTextAlignment left
+caption Behavior of thing PumpSystem
+[*] - -> PumpSystem
+state PumpSystem{
+state OFF{
+	OFF : entry / do\n	pump!pump_OFF()\nend\n
+
+OFF - -> ON : e:sbcb?sensor_ON
+}
+state ON{
+	ON : entry / do\n	pump!pump_ON()\nend\n
+
+ON - -> OFF : e:sbcb?sensor_ON
+}
+[*] - -> OFF
+}
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 07:25:05 BRT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: BR
+--></g></svg>

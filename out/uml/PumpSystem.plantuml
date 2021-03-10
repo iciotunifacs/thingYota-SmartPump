@@ -1,0 +1,19 @@
+@startuml
+caption Instances and Connectors in configuration PumpSystem
+component [pumpSystem : PumpSystem]<<PIM>>
+component [sbcb : Sensor]<<PSM>>
+component [pump : Pump]<<PSM>>
+component [sbca : Sensor]<<PSM>>
+component [sacb : Sensor]<<PSM>>
+component [saca : Sensor]<<PSM>>
+boundary Timer
+[pumpSystem : PumpSystem] -(0- [sbca : Sensor] : sbca => ctrl
+[pumpSystem : PumpSystem] -(0- [pump : Pump] : pump => notify
+[pumpSystem : PumpSystem] -(0- [sbcb : Sensor] : sbcb => ctrl
+[pumpSystem : PumpSystem] -(0- [saca : Sensor] : saca => ctrl
+[pumpSystem : PumpSystem] -(0- [sacb : Sensor] : sacb => ctrl
+[sbcb : Sensor] .. Timer : clock
+[sacb : Sensor] .. Timer : clock
+[sbca : Sensor] .. Timer : clock
+[saca : Sensor] .. Timer : clock
+@enduml

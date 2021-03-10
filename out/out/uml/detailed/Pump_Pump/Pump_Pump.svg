@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="384px" preserveAspectRatio="none" style="width:317px;height:384px;" version="1.1" viewBox="0 0 317 384" width="317px" zoomAndPan="magnify"><defs><filter height="300%" id="fe1vcye26daww" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="156" cy="16" fill="#000000" filter="url(#fe1vcye26daww)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#FEFECE" filter="url(#fe1vcye26daww)" height="265.5625" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="298" x="7" y="86"/><rect fill="#FFFFFF" height="233.2656" rx="12.5" ry="12.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="292" x="10" y="115.2969"/><line style="stroke:#A80036;stroke-width:1.5;" x1="7" x2="305" y1="112.2969" y2="112.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="136" y="103.9951">Pump</text><ellipse cx="139" cy="133.2969" fill="#000000" filter="url(#fe1vcye26daww)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><g id="Pump.OFF_2"><rect fill="#FEFECE" filter="url(#fe1vcye26daww)" height="50.2656" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="236" x="21" y="180.2969"/><line style="stroke:#A80036;stroke-width:1.5;" x1="21" x2="257" y1="206.5938" y2="206.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="43" x="117.5" y="198.292">OFF_2</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="216" x="26" y="222.7324">entry / switch(DigitalState : LOW)\n</text></g><g id="Pump.OFF_2.ON_2"><rect fill="#FEFECE" filter="url(#fe1vcye26daww)" height="50.2656" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="240" x="19" y="283.2969"/><line style="stroke:#A80036;stroke-width:1.5;" x1="19" x2="259" y1="309.5938" y2="309.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37" x="120.5" y="301.292">ON_2</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="220" x="24" y="325.7324">entry / switch(DigitalState : HIGH)\n</text></g><!--MD5=[96b9df69dc11496ebfdf1d8176f3ca5f]
+link OFF_2 to ON_2--><path d="M90.25,230.3769 C84.13,235.4469 78.72,241.3969 75,248.2969 C68.61,260.1369 74.41,270.8869 84.69,279.8569 " fill="none" id="OFF_2-to-ON_2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="88.67,283.0869,84.2073,274.3071,84.7894,279.9339,79.1626,280.516,88.67,283.0869" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="76" y="261.3638">notify?pump_ON</text><!--MD5=[b457397f75a59d80cf35b7a47a847912]
+link ON_2 to OFF_2--><path d="M172.1,283.0869 C181.7,273.0069 188.33,260.7469 183,248.2969 C180.84,243.2469 177.73,238.5069 174.16,234.1669 " fill="none" id="ON_2-to-OFF_2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="170.77,230.2969,173.7039,239.6986,174.0696,234.0536,179.7146,234.4192,170.77,230.2969" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="185" y="261.3638">notify?pump_OFF</text><!--MD5=[346d044c03e74722597c582d8ac7f73d]
+link *start*Pump to OFF_2--><path d="M139,143.4469 C139,151.4869 139,163.6269 139,174.9469 " fill="none" id="*start*Pump-to-OFF_2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="139,180.0769,143,171.0769,139,175.0769,135,171.0769,139,180.0769" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0d0afc382dfe8c82de32895cdc6f7a26]
+link *start to Pump--><path d="M156,26.16 C156,37.23 156,57.26 156,80.34 " fill="none" id="*start-to-Pump" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="156,85.62,160,76.62,156,80.62,152,76.62,156,85.62" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="72" y="375.5576">Behavior of thing Pump</text><!--MD5=[8ae3331382fcc17e927c0baf323ee95a]
+@startuml
+skinparam defaultTextAlignment left
+caption Behavior of thing Pump
+[*] - -> Pump
+state Pump{
+state OFF_2{
+	OFF_2 : entry / switch(DigitalState : LOW)\n
+
+OFF_2 - -> ON_2 : notify?pump_ON
+}
+state ON_2{
+	ON_2 : entry / switch(DigitalState : HIGH)\n
+
+ON_2 - -> OFF_2 : notify?pump_OFF
+}
+[*] - -> OFF_2
+}
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 07:25:05 BRT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: BR
+--></g></svg>
