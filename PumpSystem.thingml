@@ -2,27 +2,31 @@ import "Sensor.thingml"
 import "Pump.thingml"
 import "_Datatypes.thingml"
 
-/* AVISO:
-* ESSE ARQUIVO É UM ESBOÇO, ELE NÃO É FUNCIONAL NO MOMENTO E NÃO DEVE SER UTILIZADO.
-* THIS FILE IS A DRAFT, IT IS NOT CURRENTLY FUNCTIONAL AND SHOULD NOT BE USED.
-*/
+/* Esse arquivo ainda não foi testado.
+ * This file has not yet been tested.
+ */
 
 thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs { 
 	// Sensor ports
+	
+	/*required port clock {
+		receives ms1000_tic
+	}*/
+	
 	required port sbcb {
-		receives sensor_ON, sensor_OFF
+		receives read_value
 	}
 	
 	required port sbca {
-		receives sensor_ON, sensor_OFF
+		receives read_value
 	}
 	
 	required port sacb {
-		receives sensor_ON, sensor_OFF
+		receives read_value
 	}
 	
 	required port saca {
-		receives sensor_ON, sensor_OFF
+		receives read_value
 	}
 	
 	// Pump port
@@ -30,19 +34,75 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 		sends pump_ON, pump_OFF 
 	}
 	
-	statechart PumpSystem init OFF {
-		state OFF {
-			on entry do
-				pump!pump_OFF()
+	property sbcb: UInt8 = 0
+	property sacb: UInt8 = 0
+	property sbca: UInt8 = 0
+	property saca: UInt8 = 0
+	property sensorUpdated: Boolean = false
+	property pumpIsOn : Boolean = false
+	
+	function updatePump() : Boolean do
+		var isOn : Boolean = pumpIsOn
+		if (not isOn) do
+			if(sbcb == 1 and sacb == 1 and saca == 0) do
+				isOn = true
 			end
-			transition -> ON event e : sbcb?sensor_ON
+			else do 
+				isOn = false
+			end
+		end
+		else do 
+			if (sbcb == 1 and saca == 0)
+				isOn = true
+			else isOn = false
+		end
+		
+		return isOn
+	end
+	
+	statechart PumpSystem init LISTENING {		
+		state LISTENING {
+			
+			internal event e: sbcb?read_value action do
+				sbcb = e.val
+				sensorUpdated = true
+			end
+			internal event e: sacb?read_value action do
+				sacb = e.val
+				sensorUpdated = true
+			end
+			internal event e: sbca?read_value action do
+				sbca = e.val
+				sensorUpdated = true
+			end
+			internal event e: saca?read_value action do
+				saca = e.val
+				sensorUpdated = true
+			end
+			
+			/*internal event clock?ms1000_tic action do 
+            			pumpIsOn = updatePump()
+				if(pumpIsOn)
+            				pump!pump_ON()
+            			else
+            				pump!pump_OFF()
+            		end*/
+			
+			transition -> UPDATING
+			guard (sensorUpdated)
+			
 		}
 		
-		state ON {
+		state UPDATING {
 			on entry do
-				pump!pump_ON()
+				pumpIsOn = updatePump()
+				if(pumpIsOn)
+    					pump!pump_ON()
+            			else
+            				pump!pump_OFF()
+            			sensorUpdated = false
 			end
-			transition -> OFF event e : sbcb?sensor_ON
+			transition -> LISTENING
 		}
 	}
 }
@@ -52,6 +112,7 @@ protocol Timer;
 configuration PumpSystem {
 	
 	instance pumpSystem : PumpSystem
+
 	instance pump : Pump
 	instance sbcb : Sensor
 		set sbcb.PIN = 7
@@ -67,6 +128,7 @@ configuration PumpSystem {
 	connector pumpSystem.sbca => sbca.ctrl
 	connector pumpSystem.saca => saca.ctrl
 	connector pumpSystem.pump => pump.notify
+	//connector pumpSystem.clock over Timer
 	connector sbcb.clock over Timer
 	connector sacb.clock over Timer
 	connector sbca.clock over Timer
