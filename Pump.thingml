@@ -13,7 +13,7 @@ thing Pump includes PumpMsgs {
 	}
 	
 	function switch(value : DigitalState) do
-		`digitalWrite(`&PIN&`, `&value&`)`
+		`digitalWrite(`&PIN&`, `&value&`);` // ';' Needed, no exceptions.
 	end
 	
 	statechart Pump init OFF {
