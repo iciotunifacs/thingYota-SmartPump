@@ -7,11 +7,12 @@ import "_Datatypes.thingml"
  */
 
 thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs { 
-	// Sensor ports
 	
 	/*required port clock {
 		receives ms1000_tic
 	}*/
+	
+	// Sensor ports
 	
 	required port sbcb {
 		receives read_value
@@ -81,12 +82,12 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 			end
 			
 			/*internal event clock?ms1000_tic action do 
-            			pumpIsOn = updatePump()
+            	pumpIsOn = updatePump()
 				if(pumpIsOn)
-            				pump!pump_ON()
-            			else
-            				pump!pump_OFF()
-            		end*/
+            		pump!pump_ON()
+            	else
+            		pump!pump_OFF()
+            end*/
 			
 			transition -> UPDATING
 			guard (sensorUpdated)
@@ -97,10 +98,10 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 			on entry do
 				pumpIsOn = updatePump()
 				if(pumpIsOn)
-    					pump!pump_ON()
-            			else
-            				pump!pump_OFF()
-            			sensorUpdated = false
+    				pump!pump_ON()
+            	else
+            		pump!pump_OFF()
+            	sensorUpdated = false
 			end
 			transition -> LISTENING
 		}
@@ -114,14 +115,15 @@ configuration PumpSystem {
 	instance pumpSystem : PumpSystem
 
 	instance pump : Pump
+		set pump.PIN = 6
 	instance sbcb : Sensor
-		set sbcb.PIN = 7
+		set sbcb.PIN = 2
 	instance sacb : Sensor 
-		set sacb.PIN = 8
+		set sacb.PIN = 3
 	instance sbca : Sensor 
-		set sbca.PIN = 9
+		set sbca.PIN = 4
 	instance saca : Sensor 
-		set saca.PIN = 10
+		set saca.PIN = 5
 	
 	connector pumpSystem.sbcb => sbcb.ctrl
 	connector pumpSystem.sacb => sacb.ctrl
