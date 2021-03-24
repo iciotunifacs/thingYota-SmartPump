@@ -2,15 +2,7 @@ import "Sensor.thingml"
 import "Pump.thingml"
 import "_Datatypes.thingml"
 
-/* Esse arquivo ainda não foi testado.
- * This file has not yet been tested.
- */
-
 thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs { 
-	
-	/*required port clock {
-		receives ms1000_tic
-	}*/
 	
 	// Sensor ports
 	
@@ -32,7 +24,7 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 	
 	// Pump port
 	required port pump {
-		sends pump_ON, pump_OFF 
+		sends pump_state 
 	}
 	
 	property sbcb: UInt8 = 0
@@ -81,14 +73,6 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 				sensorUpdated = true
 			end
 			
-			/*internal event clock?ms1000_tic action do 
-            	pumpIsOn = updatePump()
-				if(pumpIsOn)
-            		pump!pump_ON()
-            	else
-            		pump!pump_OFF()
-            end*/
-			
 			transition -> UPDATING
 			guard (sensorUpdated)
 			
@@ -97,10 +81,7 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 		state UPDATING {
 			on entry do
 				pumpIsOn = updatePump()
-				if(pumpIsOn)
-    				pump!pump_ON()
-            	else
-            		pump!pump_OFF()
+				pump!pump_state(pumpIsOn)
             	sensorUpdated = false
 			end
 			transition -> LISTENING
@@ -130,7 +111,6 @@ configuration PumpSystem {
 	connector pumpSystem.sbca => sbca.ctrl
 	connector pumpSystem.saca => saca.ctrl
 	connector pumpSystem.pump => pump.notify
-	//connector pumpSystem.clock over Timer
 	connector sbcb.clock over Timer
 	connector sacb.clock over Timer
 	connector sbca.clock over Timer
