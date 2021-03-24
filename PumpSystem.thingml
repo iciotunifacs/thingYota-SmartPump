@@ -33,11 +33,12 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 	property saca: UInt8 = 0
 	property sensorUpdated: Boolean = false
 	property pumpIsOn : Boolean = false
+	property isEmptying : Boolean = false
 	
 	function updatePump() : Boolean do
 		var isOn : Boolean = pumpIsOn
 		if (not isOn) do
-			if(sbcb == 1 and sacb == 1 and saca == 0) do
+			if(sbcb == 1 and sacb == 1 and saca == 0 and not isEmptying) do
 				isOn = true
 			end
 			else do 
@@ -65,10 +66,14 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 				sensorUpdated = true
 			end
 			internal event e: sbca?read_value action do
+				if (sbca == 1 and e.val == 0)
+					isEmptying = false
 				sbca = e.val
 				sensorUpdated = true
 			end
 			internal event e: saca?read_value action do
+				if (sbca == 1 and saca == 1 and e.val == 0)
+					isEmptying = true
 				saca = e.val
 				sensorUpdated = true
 			end
