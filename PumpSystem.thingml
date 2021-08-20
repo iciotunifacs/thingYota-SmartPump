@@ -1,32 +1,25 @@
-import "Sensor.thingml"
-import "Pump.thingml"
-import "_Datatypes.thingml"
+import "./Sensor.thingml"
+import "./Pump.thingml"
+import "./_Datatypes.thingml"
 
-thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs { 
-	
+thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 	// Sensor ports
-	
 	required port sbcb {
 		receives read_value
 	}
-	
 	required port sbca {
 		receives read_value
 	}
-	
 	required port sacb {
 		receives read_value
 	}
-	
 	required port saca {
 		receives read_value
 	}
-	
 	// Pump port
 	required port pump {
-		sends pump_state 
+		sends pump_state
 	}
-	
 	property sbcb: UInt8 = 0
 	property sacb: UInt8 = 0
 	property sbca: UInt8 = 0
@@ -34,83 +27,80 @@ thing PumpSystem includes TimerMsgs, SensorMsgs, PumpMsgs {
 	property sensorUpdated: Boolean = false
 	property pumpIsOn : Boolean = false
 	property isEmptying : Boolean = false
-	
 	function updatePump() : Boolean do
 		var isOn : Boolean = pumpIsOn
 		if (not isOn) do
 			if(sbcb == 1 and sacb == 1 and saca == 0 and not isEmptying) do
 				isOn = true
 			end
-			else do 
+			else do
 				isOn = false
 			end
 		end
-		else do 
+		else do
 			if (sbcb == 1 and saca == 0)
 				isOn = true
 			else isOn = false
 		end
-		
 		return isOn
 	end
-	
-	statechart PumpSystem init LISTENING {		
+	statechart PumpSystem init LISTENING {
 		state LISTENING {
-			
-			internal event e: sbcb?read_value action do
+			internal
+			event e: sbcb?read_value
+			action do
 				sbcb = e.val
 				sensorUpdated = true
 			end
-			internal event e: sacb?read_value action do
+			internal
+			event e: sacb?read_value
+			action do
 				sacb = e.val
 				sensorUpdated = true
 			end
-			internal event e: sbca?read_value action do
+			internal
+			event e: sbca?read_value
+			action do
 				if (sbca == 1 and e.val == 0)
 					isEmptying = false
 				sbca = e.val
 				sensorUpdated = true
 			end
-			internal event e: saca?read_value action do
+			internal
+			event e: saca?read_value
+			action do
 				if (sbca == 1 and saca == 1 and e.val == 0)
 					isEmptying = true
 				saca = e.val
 				sensorUpdated = true
 			end
-			
 			transition -> UPDATING
 			guard (sensorUpdated)
-			
 		}
-		
 		state UPDATING {
 			on entry do
 				pumpIsOn = updatePump()
 				pump!pump_state(pumpIsOn)
-            	sensorUpdated = false
+				sensorUpdated = false
 			end
 			transition -> LISTENING
 		}
 	}
 }
-
 protocol Timer;
 
 configuration PumpSystem {
-	
 	instance pumpSystem : PumpSystem
-
 	instance pump : Pump
-		set pump.PIN = 6
+	set pump.PIN = 6
 	instance sbcb : Sensor
-		set sbcb.PIN = 2
-	instance sacb : Sensor 
-		set sacb.PIN = 3
-	instance sbca : Sensor 
-		set sbca.PIN = 4
-	instance saca : Sensor 
-		set saca.PIN = 5
-	
+	set sbcb.PIN = 2
+	instance sacb : Sensor
+	set sacb.PIN = 3
+	instance sbca : Sensor
+	set sbca.PIN = 4
+	instance saca : Sensor
+	set saca.PIN = 5
 	connector pumpSystem.sbcb => sbcb.ctrl
 	connector pumpSystem.sacb => sacb.ctrl
 	connector pumpSystem.sbca => sbca.ctrl

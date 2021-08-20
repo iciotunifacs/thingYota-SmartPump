@@ -1,43 +1,37 @@
-import "_Datatypes.thingml"
+import "./_Datatypes.thingml"
 
 thing fragment SensorMsgs {
 	message read_value(val : UInt8)
 }
-
 thing Sensor includes SensorMsgs, TimerMsgs {
 	property PIN: UInt8 = 10
-	
 	required port clock {
 		receives ms1000_tic
 	}
-
 	provided port ctrl 
 	@sync_send "true"
 	{
 		sends read_value
 	}
-	
 	function setDigitalInput(pin: UInt8) do
 		`pinMode(`&pin&`, INPUT);`
 	end
-	
 	function enoughWater() : Boolean do
 		return `digitalRead(`&PIN&`);`
 	end
-	
 	statechart Sensor init OFF {
 		on entry setDigitalInput(PIN)
-				
 		state OFF {
-			transition -> ON event clock?ms1000_tic
+			transition -> ON
+			event clock?ms1000_tic
 			guard enoughWater()
-			action do 
+			action do
 				ctrl!read_value(enoughWater())
 			end
 		}
-		
 		state ON {
-			transition -> OFF event clock?ms1000_tic
+			transition -> OFF
+			event clock?ms1000_tic
 			guard not enoughWater()
 			action do
 				ctrl!read_value(enoughWater())
